@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from "dotenv"
 import authROuter from './routes/authroutes.js'
 import connecttoDB from "./db/db.js"
+import  departmentRouter  from "./routes/department.route.js";
 
 dotenv.config()
 
@@ -13,7 +14,8 @@ app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json())  
 // Above line will convert the data we are given to node js  into a JSON Format
 
-app.use('/api/auth' , authROuter)    
+app.use('/api/auth' , authROuter)
+app.use('/api/department' , departmentRouter)    
 
 
 

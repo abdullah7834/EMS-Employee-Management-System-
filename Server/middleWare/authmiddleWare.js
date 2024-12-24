@@ -12,10 +12,10 @@ import User from '../models/User.js'
         res.status(404).json({success : false  , error : "TOken  not valid"})
     }
 
-    const user   = await User.findById({_id : decoded._id}).select(-password)
+    const user   = await User.findById({_id : decoded._id}).select('-password')
     if(!user){
-
-    }res.status(404).json({success : false  , error : "User not found"})
+        res.status(404).json({success : false  , error : "User not found"})
+    }
     req.user  = user ;
     next()
     } catch (error) {

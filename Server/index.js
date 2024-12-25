@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import authROuter from './routes/authroutes.js'
 import connecttoDB from "./db/db.js"
 import  departmentRouter  from "./routes/department.route.js";
+import employeeRouter   from  './routes/employee.js'
 
 dotenv.config()
 
@@ -15,7 +16,9 @@ app.use(express.json())
 // Above line will convert the data we are given to node js  into a JSON Format
 
 app.use('/api/auth' , authROuter)
-app.use('/api/department' , departmentRouter)    
+app.use('/api/department' , departmentRouter)     
+app.use('/api/employee' , employeeRouter)     
+
 
 
 

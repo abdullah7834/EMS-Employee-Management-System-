@@ -5,6 +5,11 @@ import connecttoDB from "./db/db.js"
 const userRegister  = async () =>{
     connecttoDB()
     try {
+        const existingUser = await User.findOne({ email: 'admin@gmail.com' });
+        if (existingUser) {
+            console.log('Admin user already exists.');
+            return;
+        }
         const hashPassword = await bcrypt.hash("admin" , 10)
         const newUser =  new User({
             name :"Admin" ,

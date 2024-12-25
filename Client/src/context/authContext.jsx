@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import axios from 'axios'
 
 
 
@@ -14,18 +15,16 @@ function AuthContext( {children}) {
       try {
         const token  = localStorage.getItem("token")
         if(token){
-        const res  = await axios.get("http://localhost:3000/api/auth/verify" , {headers : {"Authorization" : `Bearer ${localStorage.getItem("token")}`}} )
-         if(res.data.success){
+        const res  = await axios.get("http://localhost:3000/api/auth/verify" , {headers : {"Authorization" : `Bearer ${"token"}`}} )
+         if(res.status===200 && res.data.success){
            setUser(res.data.user)
          }
         } else {
           setUser(null)
         }
       } catch (error) {
-        if(error.res && !error.res.data.success){
+        console.log("Verification Error" , error)
           setUser(null)
-        }
-
       }finally {
         setLoading(false)
       }

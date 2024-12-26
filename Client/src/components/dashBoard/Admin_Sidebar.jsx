@@ -27,7 +27,7 @@ function Admin_Sidebar() {
             <FaCalendar />
             <span>Leaves</span>
         </NavLink>
-        <NavLink to='/admin-dashboard'className='flex items-center space-x-4  py-2.5 px-4 rounded' >
+        <NavLink to='/admin-dashboard/sallary/add'  className={({isActive})=>`${isActive ? 'bg-teal-600' : ''} flex items-center space-x-4  py-2.5 px-4 rounded`} >
             <FaMoneyBillWave />
             <span>Sallary</span>
         </NavLink>

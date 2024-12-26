@@ -64,14 +64,28 @@ export const fetchDepartments = async () => {
          departments = res.data.departments
       }
     } catch (error) {
-      console.error("An unexpected error occurred:", error);
-      alert(
-        error.response?.data?.error || "Something went wrong. Please try again."
-      );
+      console.error("An unexpected error occurred:", error.message);
     } 
     return departments
   };
 
+
+  export const getEmployees  = async (id) => {
+    let employees 
+    try {
+      const res = await axios.get(`http://localhost:3000/api/employee/department/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    });
+      if (res.data.success) {
+         employees = res.data.employees
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred:", error.message);
+    } 
+    return employees
+  }
 
   export const EmployeeButtons = ({ _id }) => {
     const navigate = useNavigate();
@@ -94,7 +108,7 @@ export const fetchDepartments = async () => {
         </button>
         <button
           className="px-3 py-1 bg-yellow-600 te)xt-white rounded"
-          
+          onClick={() => navigate(`/admin-dashboard/employees/sallary/${_id}`)}
         >
           Sallary
         </button>

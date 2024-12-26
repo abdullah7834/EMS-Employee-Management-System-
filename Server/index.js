@@ -5,6 +5,7 @@ import authROuter from './routes/authroutes.js'
 import connecttoDB from "./db/db.js"
 import  departmentRouter  from "./routes/department.route.js";
 import employeeRouter   from  './routes/employee.js'
+import sallaryRouter from './routes/sallary.js'
 
 dotenv.config()
 
@@ -18,7 +19,8 @@ app.use(express.json())
 
 app.use('/api/auth' , authROuter)
 app.use('/api/department' , departmentRouter)     
-app.use('/api/employee' , employeeRouter)     
+app.use('/api/employee' , employeeRouter)   
+app.use('/api/sallary', sallaryRouter)  
 
 
 

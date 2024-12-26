@@ -118,6 +118,21 @@ export const addEmployee = async (req, res) => {
   }
 
 
+  export const fetchEmployeesByDepId = async (req, res) => {
+    try {
+        const {id} = req.params;
+    const employees  =  await Employee.find({department : id })
+    if (!employees) {
+        // If employee is not found
+        return res.status(404).json({ success: false, error: 'Employee not found' });
+      }
+  
+    return res.status(200).json({success : true  , employees})
+    } catch (error) {
+        res.status(500).json({success : false  , error : "EmployeeByDEpID not found"}) 
+    }
+  }
+
 //   export const deleteDepartment = async (req, res) => {
 //     try {
 //       const { id } = req.params;

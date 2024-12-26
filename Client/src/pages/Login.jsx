@@ -28,7 +28,7 @@ function Login() {
       setError(error.res.data.message)
   }else{
     setError("Server Error")
-    console.log(error)
+    
   }
    }
     }

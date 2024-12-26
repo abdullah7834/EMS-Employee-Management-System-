@@ -6,28 +6,28 @@ function EditComponent() {
 const[department , setDepartment] = useState({})
 const[departmentLoading  , setdepartmentLoading] = useState(false)
 const navigate = useNavigate()
-    useEffect(() => {
-        const fetchDeoartments = async () => {
-            setdepartmentLoading(true);
-            try {
-                const res = await axios.get(`http://localhost:3000/api/department/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                });
-                if (res.data.success) {
-                    setDepartment(res.data.department);
-                }
-            } catch (error) {
-                if (error.res &&  !error.res.data.success) {
-                    alert(error.res.data.error);
-                } 
-            } finally {
-                setdepartmentLoading(false);
-            }
-        };
-        fetchDeoartments();
-    }, [id]);
+      useEffect(() => {
+          const fetchDeoartments = async () => {
+              setdepartmentLoading(true);
+              try {
+                  const res = await axios.get(`http://localhost:3000/api/department/${id}`, {
+                      headers: {
+                          Authorization: `Bearer ${localStorage.getItem("token")}`,
+                      },
+                  });
+                  if (res.data.success) {
+                      setDepartment(res.data.department);
+                  }
+              } catch (error) {
+                  if (error.res &&  !error.res.data.success) {
+                      alert(error.res.data.error);
+                  } 
+              } finally {
+                  setdepartmentLoading(false);
+              }
+          };
+          fetchDeoartments();
+      }, []);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setDepartment({ ...department, [name]: value });

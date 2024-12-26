@@ -1,12 +1,12 @@
 import express from "express"
 const router = express.Router();
 import { login, verify } from "../controllers/authcontroler.js";
-import authmiddleWare from "../middleWare/authmiddleWare.js";
+import verifyUser from "../middleWare/authmiddleWare.js";
 
 
 
 router.post('/login' , login)
-router.get('/verify' , authmiddleWare , verify)
+router.get('/verify' , verifyUser , verify)
 
 
 export default router;

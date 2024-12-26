@@ -1,6 +1,6 @@
 import { time } from "console";
 import mongoose, { Schema } from "mongoose";
-import { type } from "os";
+
 
 
 const employeeSchema = new mongoose.Schema({

@@ -1,4 +1,4 @@
-// import Department from "../models/Department.js"
+import Department from "../models/Department.js"
 
 
 import multer from "multer";
@@ -21,15 +21,28 @@ const storage = multer.diskStorage({
 
 export  const upload = multer({storage : storage}) 
 
-// export const getEmployee =async (req , res) =>{
-//    try {
-//     const departments  = await Department.find()
-//     return res.status(200).json({success : true  , departments})
-//    } catch (error) {
-//     return res.status(500).json({success : false  , error : "Department not found"})
-//    }
-// }
-
+export const getEmployees =async (req , res) =>{
+   try {
+    const employees  = await Employee.find().populate('userId' , {password : 0}).populate('department')
+    return res.status(200).json({success : true  , employees})
+   } catch (error) {
+    return res.status(500).json({success : false  , error : "employees  not found"})
+   }
+}
+export const viewEmployee = async(req , res) =>{
+    try {
+        const {id} = req.params;
+    const employee  =  await Employee.findById(id).populate('userId' ,'-password').populate('department')
+    if (!employee) {
+        // If employee is not found
+        return res.status(404).json({ success: false, error: 'Employee not found' });
+      }
+  
+    return res.status(200).json({success : true  , employee})
+    } catch (error) {
+        res.status(500).json({success : false  , error : "Employee not found"}) 
+    }
+  }
 
 
 
@@ -62,12 +75,7 @@ export const addEmployee = async (req, res) => {
             department,
             sallary,
         });
-        const savedEmployee = await newEmployee.save();
-
-        // Update the user's employees array
-        savedUser.employees.push(savedEmployee._id);
-        await savedUser.save();
-
+         await newEmployee.save();
         return res.status(200).json({ success: true, message: "Employee created successfully" });
     } catch (error) {
         return res.status(500).json({ success: false, error: "Employee add failed due to some reason" });
@@ -76,27 +84,38 @@ export const addEmployee = async (req, res) => {
 
   
 
-//   export const viewDepartment = async(req , res) =>{
-//     try {
-//         const {id} = req.params;
-//     const department  =  await Department.findById({_id : id})
-//     return res.status(200).json({success : true  , department})
-//     } catch (error) {
-//         res.status(500).json({success : false  , error : "Department not found"}) 
-//     }
-//   }
 
 
-//   export const updateDepartment = async (req , res ) =>{
-//     try {
-//       const{id} = req.params
-//       const {dep_name , description} = req.body;
-//       const updateDEp = await Department.findByIdAndUpdate({_id : id} , {dep_name , description} , {new : true})
-//       return res.status(200).json({success : true , updateDEp})
-//     } catch (error) {
-//       return res.status(500).json({success : false  , error : "Department edit Failed due to some Reason "})
-//     }
-//   }
+
+  export const UpdateEmployee = async (req , res ) =>{
+    try {
+      
+        const{id} = req.params
+        const {name  ,  maritalStatus  , designation  , department  , sallary} = req.body;
+       const employee  = await Employee.findById(id)
+       if(!employee){
+          return res.status(404).json({success : false  , error : "Employee not found"})
+      }
+      const user  = await User.findById({_id : employee.userId})
+  
+      if(!user) {
+          return res.status(404).json({success : false  , error : "User not found"})
+      }
+      const updateUser  = await User.findByIdAndUpdate({_id : employee.userId} , {name} , {new : true})
+  
+  
+        const updateEmployee = await Employee.findByIdAndUpdate({_id : id} , {  maritalStatus  , designation  ,  sallary , department} , {new : true})
+  
+        if(!updateEmployee || !updateUser){
+          return res.status(404).json({success : false  , error : "document  not found"})
+      } 
+      else  {
+          return res.status(200).json({success : true  , message : 'employee Updated'})
+      } 
+  }catch(error) {
+      return res.status(500).json({success : false  , error : error.message ||'Update employee server Error'})
+  }
+  }
 
 
 //   export const deleteDepartment = async (req, res) => {

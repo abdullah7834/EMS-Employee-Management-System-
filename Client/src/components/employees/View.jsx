@@ -1,71 +1,88 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { useEffect , useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function View() {
-    const {id} = useParams()
-    const [employee , setEmployee] = useState(null)
+    const { id } = useParams();
+    const [employee, setEmployee] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
+
     useEffect(() => {
         const fetchEmployee = async () => {
-            
             try {
                 const res = await axios.get(`http://localhost:3000/api/employee/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 });
-                console.log(res.data)
                 if (res.data.success) {
                     setEmployee(res.data.employee);
                 }
             } catch (error) {
-                console.log(error)
-                if (error.res &&  !error.res.data.success) {
-                    alert(error.res.data.error);
-                } 
-            } 
+                setErrorMessage(error.response?.data?.error || "Unable to fetch employee details!");
+            }
         };
         fetchEmployee();
-    }, []);
-   
-  return (
-    <>{employee ? (
-    <div className='max-w-3xl mx-auto  mt-10 bg-white p-8 rounded-md shadow-md'>
-  <h2 className='text-2xl font-bold mb-8 text-center'>Employee Details</h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <div>
-            <img src={`http://localhost:3000/${employee.userId?.profileImage}`} alt="Profile"  className='rounded-full border w-72' />
-            </div>
-        <div className='flex space-x-3 mb-5'>
-            <p className='text-lg font-bold'>Name :</p>
-            <p className='font-medium'>{employee.userId.name || "N/A"}</p>
+    }, [id]);
+
+    return (
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">
+            {errorMessage ? (
+                <div className="text-red-600 text-lg font-semibold">{errorMessage}</div>
+            ) : employee ? (
+                <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div className="flex flex-col md:flex-row">
+                        <div className="md:w-1/3 p-5 flex justify-center items-center bg-gradient-to-br from-blue-500 to-purple-500">
+                            <img
+                                src={
+                                    employee?.userId?.profileImage
+                                        ? `http://localhost:3000/${employee.userId.profileImage}`
+                                        : "/default-profile.png"
+                                }
+                                alt="Profile"
+                                className="w-48 h-48 rounded-full object-cover border-4 border-white shadow-md"
+                            />
+                        </div>
+                        <div className="md:w-2/3 p-8">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center md:text-left">
+                                Employee Details
+                            </h2>
+                            <div className="space-y-4">
+                                <div className="flex justify-between items-center border-b pb-3">
+                                    <span className="font-semibold text-gray-600">Name:</span>
+                                    <span className="text-gray-800">{employee?.userId?.name || "N/A"}</span>
+                                </div>
+                                <div className="flex justify-between items-center border-b pb-3">
+                                    <span className="font-semibold text-gray-600">Employee ID:</span>
+                                    <span className="text-gray-800">{employee?.employeeId || "N/A"}</span>
+                                </div>
+                                <div className="flex justify-between items-center border-b pb-3">
+                                    <span className="font-semibold text-gray-600">Date of Birth:</span>
+                                    <span className="text-gray-800">{new Date(employee?.dob).toLocaleDateString() || "N/A"}</span>
+                                </div>
+                                <div className="flex justify-between items-center border-b pb-3">
+                                    <span className="font-semibold text-gray-600">Gender:</span>
+                                    <span className="text-gray-800">{employee?.gender || "N/A"}</span>
+                                </div>
+                                <div className="flex justify-between items-center border-b pb-3">
+                                    <span className="font-semibold text-gray-600">Department:</span>
+                                    <span className="text-gray-800">
+                                        {employee?.department?.dep_name || "N/A"}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="font-semibold text-gray-600">Marital Status:</span>
+                                    <span className="text-gray-800">{employee?.maritalStatus || "N/A"}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <div className="text-lg text-gray-600">Loading...</div>
+            )}
         </div>
-        <div className='flex space-x-3 mb-5'>
-            <p className='text-lg font-bold'>Employee ID:</p>
-            <p className='font-medium'>{employee.employeeId || "N/A" }</p>
-        </div>
-        <div className='flex space-x-3 mb-5'>
-            <p className='text-lg font-bold'>Date of Birth:</p>
-            <p className='font-medium'>{employee.dob || "N/A"}</p>
-        </div>
-        <div className='flex space-x-3 mb-5'>
-            <p className='text-lg font-bold'>Gender:</p>
-            <p className='font-medium'>{employee.gender || "N/A" }</p>
-        </div>
-        <div className='flex space-x-3 mb-5'>
-            <p className='text-lg font-bold'>Department:</p>
-            <p className='font-medium'>{employee.department.dep_name || "N/A"}</p>
-        </div>
-        <div className='flex space-x-3 mb-5'>
-            <p className='text-lg font-bold'>Marital Status :</p>
-            <p className='font-medium'>{employee.maritalStatus || "N/A"}</p>
-        </div>
-        </div>
-    </div>
-    ) :<div>Loading ...</div>}</>
-  )
-  
+    );
 }
 
-export default View
+export default View;

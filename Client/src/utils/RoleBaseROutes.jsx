@@ -2,7 +2,7 @@ import React from 'react'
 import { useAuth } from '../context/authContext'
 import { Navigate } from 'react-router-dom'
 
-function RoleBaseROutes({children , requiredRole}) {
+function RoleBaseROutes({children , requiredRole =[]}) {
     const {user ,loading} = useAuth()
 
     if(loading){

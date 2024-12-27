@@ -28,7 +28,7 @@ const filterSallaries   = (q) =>{
    const filteredRecords  = sallaries.filter((leave) => 
     leave.emnployeeId.toLowerCase().includes(q.toLowerCase())
 )
-   setFilteredSallaries(filterSallaries)
+   setFilteredSallaries(filteredRecords)
 }
 
 
@@ -69,7 +69,7 @@ const filterSallaries   = (q) =>{
                             <td className='px-6 py-3'>{sallary.allowences}</td>
                             <td className='px-6 py-3'>{sallary.deductions}</td>
                             <td className='px-6 py-3'>{sallary.netSallary }</td>
-                            <td className='px-6 py-3'>{new Date(sallary.patdate).toLocaleDateString() }</td>
+                            <td className='px-6 py-3'>{new Date(sallary.paydate).toLocaleDateString() }</td>
                         </tr>
                     ))}
                 </tbody>

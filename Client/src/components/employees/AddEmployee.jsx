@@ -70,7 +70,7 @@ function AddEmployee() {
               Email
             </label>
             <input
-              type="text"
+              type="email"
               name="email"
               placeholder="Insert Email"
               className="mt-1 p-2 block w-full border border-gray-300 rounded-md"

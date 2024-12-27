@@ -1,4 +1,5 @@
 import Sallary from "../models/sallary.js";
+import Employee from '../models/Employees.js'
 
 export const addSallary = async(req , res) =>{
   try {
@@ -26,7 +27,11 @@ export const addSallary = async(req , res) =>{
 export const getSallary = async (req , res ) =>{
     try {
         const {id} = req.params
-      const sallary  = await Sallary.find({employeeId  :  id}).populate('employeeId' , 'employeeId')
+      let sallary  = await Sallary.find({employeeId  :  id}).populate('employeeId' , 'employeeId')
+      if(!sallary || sallary.length < 1 ){
+        const employee = await Employee.findOne({userId : id})
+        sallary = await Sallary.find({employeeId : employee._id}).populate('employeeId' , 'employeeId')
+      }
       return res.status(200).json({success  : true , sallary})
     } catch (error) {
         res.status(500).json({success : false , error : error.message || "Sallary get Server Error"})

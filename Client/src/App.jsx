@@ -14,6 +14,10 @@ import View from './components/employees/View'
 import EditEmployee from './components/employees/EditEmployee'
 import AddSallary from './components/sallary/AddSallary'
 import ViewSallary from './components/sallary/ViewSallary'
+import Summary from './EmployeeDashboard/Summary'
+import List from './leave/List'
+import AddLeave from './leave/AddLeave'
+import Setting from './EmployeeDashboard/Setting'
 function App() {
 
 
@@ -49,7 +53,20 @@ function App() {
     </Route>
     
     
-    <Route path='/employee-dashboard' element={<EmployeeDashboard/>} />
+    <Route path='/employee-dashboard' element={
+      <PrivateRoutes>
+        <RoleBaseROutes requiredRole={["admin","employee"]}>
+        <EmployeeDashboard  />
+        </RoleBaseROutes>
+      </PrivateRoutes>
+      }>
+<Route  index  element={<Summary/>}></Route>
+<Route path='/employee-dashboard/profile/:id'  element={<View/>} />
+<Route path='/employee-dashboard/leaves'  element={<List/>} />
+<Route path='/employee-dashboard/add-leave'  element={<AddLeave/>} />
+<Route path='/employee-dashboard/sallary/:id'  element={<ViewSallary/>} />
+<Route path='/employee-dashboard/setting'  element={<Setting/>} />
+</Route>
    </Routes>
    </BrowserRouter>
   )

@@ -31,11 +31,11 @@ export const getEmployees =async (req , res) =>{
 }
 export const viewEmployee = async(req , res) =>{
     try {
+        let employee
         const {id} = req.params;
-    const employee  =  await Employee.findById(id).populate('userId' ,'-password').populate('department')
+    employee  =  await Employee.findById({_id :id}).populate('userId' ,{password : 0}).populate('department')
     if (!employee) {
-        // If employee is not found
-        return res.status(404).json({ success: false, error: 'Employee not found' });
+     employee =    await Employee.findOne({userId :  id}).populate('userId' , {password : 0}).populate('department')
       }
   
     return res.status(200).json({success : true  , employee})

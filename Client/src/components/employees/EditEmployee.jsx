@@ -32,7 +32,7 @@ useEffect(() => {
     const fetchEmployee = async () => {
             
         try {
-            const res = await axios.get(`http://localhost:3000/api/employee/${id}`, {
+            const res = await axios.get(`https://ems-employee-management-system-backend.vercel.app/api/employee/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -62,7 +62,7 @@ useEffect(() => {
     
     try {
         const res = await axios.put(
-        `http://localhost:3000/api/employee/${id}`,
+        `https://ems-employee-management-system-backend.vercel.app/api/employee/${id}`,
         employee ,
           {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

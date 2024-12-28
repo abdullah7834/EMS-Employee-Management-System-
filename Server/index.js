@@ -15,7 +15,7 @@ const app = express();
 connecttoDB()
 app.use(cors())
 app.use(express.static('public/uploads'))
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: 'https://ems-employee-management-system-frontend.vercel.app' }));
 app.use(express.json())  
 // Above line will convert the data we are given to node js  into a JSON Format
 

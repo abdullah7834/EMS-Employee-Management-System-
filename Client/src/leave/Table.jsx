@@ -8,7 +8,7 @@ function Table() {
   const [filteredleaves, setfilteredLeaves] = useState(null);
   const fetchLeaves = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/leave", {
+      const res = await axios.get("https://ems-employee-management-system-backend.vercel.app/api/leave", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

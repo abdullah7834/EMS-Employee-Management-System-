@@ -16,7 +16,7 @@ function DepartmentList() {
   const fetchDepartments = async () => {
     setDepartmentLoading(true);
     try {
-      const res = await axios.get("http://localhost:3000/api/department", {
+      const res = await axios.get("https://ems-employee-management-system-backend.vercel.app/api/department", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

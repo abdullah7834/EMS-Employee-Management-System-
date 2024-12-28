@@ -17,7 +17,7 @@ function AddDepartment() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://ems-employee-management-system-backend.vercel.app/api/department/add",
+        "https://ems-employee-management-system-r42scz8oj.vercel.app/api/department/add",
         department,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

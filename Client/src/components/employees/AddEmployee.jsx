@@ -32,7 +32,7 @@ function AddEmployee() {
     })
     try {
         const res = await axios.post(
-          "https://ems-employee-management-system-backend.vercel.app/api/employee/add",
+          "https://ems-employee-management-system-r42scz8oj.vercel.app/api/employee/add",
           formDataobj,
           {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

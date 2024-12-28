@@ -30,7 +30,7 @@ export const DepartmentButtons = ({ _id, ondepartmentDelete }) => {
     if (confirm) {
       try {
         const res = await axios.delete(
-          `https://ems-employee-management-system-backend.vercel.app/api/department/${id}`,
+          `https://ems-employee-management-system-r42scz8oj.vercel.app/api/department/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

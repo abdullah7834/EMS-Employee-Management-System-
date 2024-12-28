@@ -10,7 +10,7 @@ function LeaveDetails() {
     useEffect(() => {
         const fetchLeave = async () => {
             try {
-                const res = await axios.get(`https://ems-employee-management-system-backend.vercel.app/api/leave/detail/${id}`, {
+                const res = await axios.get(`https://ems-employee-management-system-r42scz8oj.vercel.app/api/leave/detail/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },

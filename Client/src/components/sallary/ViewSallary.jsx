@@ -11,7 +11,7 @@ function ViewSallary() {
     const {user} = useAuth()
     const fetchSallaries  = async () =>{
         try {
-            const res  = await axios.get(`https://ems-employee-management-system-backend.vercel.app/api/sallary/${id}/${user.role}` , {headers : {'Authorization' : `Bearer ${localStorage.getItem("token")}`}})
+            const res  = await axios.get(`https://ems-employee-management-system-r42scz8oj.vercel.app/api/sallary/${id}/${user.role}` , {headers : {'Authorization' : `Bearer ${localStorage.getItem("token")}`}})
             if(res.data.success){
                 setSallareis(res.data.sallary)
                 setFilteredSallaries(res.data.sallary)

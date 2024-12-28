@@ -36,7 +36,7 @@ const navigate = useNavigate()
         e.preventDefault();
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/department/${id}`,
+        `https://ems-employee-management-system-r42scz8oj.vercel.app/api/department/${id}`,
         department,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

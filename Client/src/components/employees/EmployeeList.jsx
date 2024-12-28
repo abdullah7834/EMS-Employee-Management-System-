@@ -16,7 +16,7 @@ function EmployeeList() {
     const fetchEmployees = async () => {
       setEmpLoading(true);
       try {
-        const res = await axios.get("https://ems-employee-management-system-backend.vercel.app/api/employee", {
+        const res = await axios.get("https://ems-employee-management-system-r42scz8oj.vercel.app/api/employee", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -29,7 +29,7 @@ function EmployeeList() {
             dep_name: emp.department?.dep_name || "No Department",
             name  : emp.userId?.name || "Unknown",
             dob:new Date(emp.dob).toLocaleDateString(),
-            profileImage :  emp.userId?.profileImage ?( <img width={40} className='rounded-full' src={`https://ems-employee-management-system-backend.vercel.app/${emp.userId.profileImage}`}/>): (
+            profileImage :  emp.userId?.profileImage ?( <img width={40} className='rounded-full' src={`https://ems-employee-management-system-r42scz8oj.vercel.app/${emp.userId.profileImage}`}/>): (
               <span>No Image</span> // Handle missing profile image
             ),
             action: (

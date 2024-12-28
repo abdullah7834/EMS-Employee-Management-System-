@@ -8,6 +8,7 @@ import employeeRouter   from  './routes/employee.js'
 import sallaryRouter from './routes/sallary.js'
 import leaveRouter from  './routes/leave.route.js'
 import settingRouter from  './routes/setting.js'
+import dashboardRouter from './routes/dashboard.js'
 dotenv.config()
 
 const app = express();
@@ -24,6 +25,8 @@ app.use('/api/employee' , employeeRouter)
 app.use('/api/sallary', sallaryRouter) 
 app.use('/api/leave' , leaveRouter) 
 app.use('/api/setting' , settingRouter)
+app.use('/api/dashboard' , dashboardRouter)
+
 
 
 

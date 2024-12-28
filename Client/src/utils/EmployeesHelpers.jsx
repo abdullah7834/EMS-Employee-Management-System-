@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 
 export const columns = [
@@ -114,7 +115,7 @@ export const fetchDepartments = async () => {
         </button>
         <button
           className="px-3 py-1 bg-red-600 text-white rounded"
-          
+          onClick={()=> navigate(`/admin-dashboard/employees/leaves/${_id}`)}
         >
           Leave
         </button>

@@ -43,7 +43,7 @@ export const addDepartment = async (req, res) => {
     const department  =  await Department.findById({_id : id})
     return res.status(200).json({success : true  , department})
     } catch (error) {
-        res.status(500).json({success : false  , error : "Department not found"}) 
+    return  res.status(500).json({success : false  , error : "Department not found"}) 
     }
   }
 
@@ -63,7 +63,8 @@ export const addDepartment = async (req, res) => {
   export const deleteDepartment = async (req, res) => {
     try {
       const { id } = req.params;
-      const deleteDep = await Department.findByIdAndDelete(id); // Directly pass id
+      const deleteDep = await Department.findById(id); // Directly pass id
+      await Department.deleteOne()
   
       if (!deleteDep) {
         return res.status(404).json({ success: false, error: "Department not found" });

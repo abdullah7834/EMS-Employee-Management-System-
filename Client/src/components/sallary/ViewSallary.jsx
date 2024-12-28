@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useAuth } from '../../context/authContext'
 
 function ViewSallary() {
     const[sallaries , setSallareis] = useState(null)
     const [filteredSallaries , setFilteredSallaries] = useState(null)
     const {id} = useParams ()
     let sno = 1 ;
+    const {user} = useAuth()
     const fetchSallaries  = async () =>{
         try {
-            const res  = await axios.get(`http://localhost:3000/api/sallary/${id}` , {headers : {'Authorization' : `Bearer ${localStorage.getItem("token")}`}})
+            const res  = await axios.get(`http://localhost:3000/api/sallary/${id}/${user.role}` , {headers : {'Authorization' : `Bearer ${localStorage.getItem("token")}`}})
             if(res.data.success){
                 setSallareis(res.data.sallary)
                 setFilteredSallaries(res.data.sallary)

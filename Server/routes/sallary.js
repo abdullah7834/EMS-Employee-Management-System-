@@ -7,7 +7,7 @@ import { addSallary, getSallary } from "../controllers/sallaryController.js";
 
 
 router.post('/add' , verifyUser , addSallary )
-router.get('/:id' , verifyUser , getSallary  )
+router.get('/:id/:role' , verifyUser , getSallary  )
 
 
 

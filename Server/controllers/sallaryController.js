@@ -19,21 +19,23 @@ export const addSallary = async(req , res) =>{
     return res.status(200).json({success : true})
   } 
   catch (error) {
-    res.status(500).json({success : false , error : error.message || "Sallary add Server Error"})
+    return  res.status(500).json({success : false , error : error.message || "Sallary add Server Error"})
   }
 }
 
 
 export const getSallary = async (req , res ) =>{
     try {
-        const {id} = req.params
-      let sallary  = await Sallary.find({employeeId  :  id}).populate('employeeId' , 'employeeId')
-      if(!sallary || sallary.length < 1 ){
-        const employee = await Employee.findOne({userId : id})
-        sallary = await Sallary.find({employeeId : employee._id}).populate('employeeId' , 'employeeId')
-      }
+        const {id , role} = req.params
+        let sallary ;
+        if(role === "admin"){
+          sallary  = await Sallary.find({employeeId  :  id}).populate('employeeId' , 'employeeId') 
+        }else {
+          const employee = await Employee.findOne({userId : id})
+          sallary = await Sallary.find({employeeId : employee._id}).populate('employeeId' , 'employeeId')
+        }
       return res.status(200).json({success  : true , sallary})
     } catch (error) {
-        res.status(500).json({success : false , error : error.message || "Sallary get Server Error"})
+      return   res.status(500).json({success : false , error : error.message || "Sallary get Server Error"})
     }
 }

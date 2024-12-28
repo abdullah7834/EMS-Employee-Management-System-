@@ -10,50 +10,47 @@ function DepartmentList() {
   const [filterDep , setfilterDEp]= useState([])
 
   // Handler for department deletion
-  const ondepartmentDelete = (id) => {
-    const updatedDepartments = departments.filter((dep) => dep._id !== id);
-    setDepartments(updatedDepartments);
+  const ondepartmentDelete = () => {
+      fetchDepartments();
   };
+  const fetchDepartments = async () => {
+    setDepartmentLoading(true);
+    try {
+      const res = await axios.get("http://localhost:3000/api/department", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
+      if (res.data.success) {
+        let sno = 1;
+        const data = res.data.departments.map((dep) => ({
+          _id: dep._id,
+          sno: sno++,
+          dep_name: dep.dep_name,
+          action: (
+            <DepartmentButtons
+              _id={dep._id}
+              ondepartmentDelete={ondepartmentDelete}
+            />
+          ),
+        }));
+        setDepartments(data);
+        setfilterDEp(data)
+      } else {
+        alert("Failed to fetch departments");
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+      alert(
+        error.response?.data?.error || "Something went wrong. Please try again."
+      );
+    } finally {
+      setDepartmentLoading(false);
+    }
+  };
   // Fetch departments from the backend
   useEffect(() => {
-    const fetchDepartments = async () => {
-      setDepartmentLoading(true);
-      try {
-        const res = await axios.get("http://localhost:3000/api/department", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-
-        if (res.data.success) {
-          let sno = 1;
-          const data = res.data.departments.map((dep) => ({
-            _id: dep._id,
-            sno: sno++,
-            dep_name: dep.dep_name,
-            action: (
-              <DepartmentButtons
-                _id={dep._id}
-                ondepartmentDelete={ondepartmentDelete}
-              />
-            ),
-          }));
-          setDepartments(data);
-          setfilterDEp(data)
-        } else {
-          alert("Failed to fetch departments");
-        }
-      } catch (error) {
-        console.error("An unexpected error occurred:", error);
-        alert(
-          error.response?.data?.error || "Something went wrong. Please try again."
-        );
-      } finally {
-        setDepartmentLoading(false);
-      }
-    };
-
     fetchDepartments();
   }, []);
 

@@ -1,4 +1,3 @@
-import Department from "../models/Department.js"
 
 
 import multer from "multer";
@@ -40,7 +39,7 @@ export const viewEmployee = async(req , res) =>{
   
     return res.status(200).json({success : true  , employee})
     } catch (error) {
-        res.status(500).json({success : false  , error : "Employee not found"}) 
+     return  res.status(500).json({success : false  , error : "Employee not found"}) 
     }
   }
 
@@ -129,7 +128,7 @@ export const addEmployee = async (req, res) => {
   
     return res.status(200).json({success : true  , employees})
     } catch (error) {
-        res.status(500).json({success : false  , error : "EmployeeByDEpID not found"}) 
+     return   res.status(500).json({success : false  , error : "EmployeeByDEpID not found"}) 
     }
   }
 

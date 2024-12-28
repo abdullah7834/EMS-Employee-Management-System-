@@ -26,7 +26,7 @@ function EmployeeList() {
           const data = res.data.employees.map((emp) => ({
             _id: emp._id,
             sno: sno++,
-            dep_name: emp.department.dep_name,
+            dep_name: emp.department?.dep_name || "No Department",
             name  : emp.userId?.name || "Unknown",
             dob:new Date(emp.dob).toLocaleDateString(),
             profileImage :  emp.userId?.profileImage ?( <img width={40} className='rounded-full' src={`http://localhost:3000/${emp.userId.profileImage}`}/>): (
@@ -44,9 +44,9 @@ function EmployeeList() {
         }
       } catch (error) {
         console.error("An unexpected error occurred:", error.message);
-        alert(
-          error.response?.data?.error || "Something went wrong. Please try again."
-        );
+      if(error.response) {
+        alert(error.response.data.error)
+      }
       } finally {
         setEmpLoading(false);
       }

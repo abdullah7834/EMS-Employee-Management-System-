@@ -32,7 +32,7 @@ function AddLeave() {
             },
         });
         if (res.data.success) {
-             navigate('/employee-dashboard/leaves')
+             navigate(`/employee-dashboard/leaves/${user._id}`)
         }
     } catch (error) {
         if(error.res && !error.res.data.success){

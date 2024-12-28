@@ -40,7 +40,7 @@ export const DepartmentButtons = ({ _id, ondepartmentDelete }) => {
 
         if (res.data.success) {
           alert("Department deleted successfully.");
-          ondepartmentDelete(id); // Call the parent function to update state
+          ondepartmentDelete(); // Call the parent function to update state
         } else {
           alert(res.data.error || "Failed to delete the department.");
         }

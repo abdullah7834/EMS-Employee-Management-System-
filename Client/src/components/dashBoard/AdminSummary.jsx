@@ -9,7 +9,7 @@ function AdminSummary() {
   useEffect(() => {
     const fetchSummary =async () =>{
       try {
-        const summary = await axios.get('https://ems-employee-management-system-r42scz8oj.vercel.app/api/dashboard/summary' , {headers : {'Authorization' : `Bearer ${localStorage.getItem("token")}`}})
+        const summary = await axios.get('https://ems-employee-management-system-api.vercel.app/api/dashboard/summary' , {headers : {'Authorization' : `Bearer ${localStorage.getItem("token")}`}})
    setSummary(summary.data)
       } catch (error) {
         if(error.response){

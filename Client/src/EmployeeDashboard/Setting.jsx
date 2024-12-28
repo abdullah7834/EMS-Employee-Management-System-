@@ -24,7 +24,7 @@ if(setting.newPassword !== setting.confirmPassword){
     setError("Password not matched")
 }else {
     try {
-        const res =await axios.put("https://ems-employee-management-system-r42scz8oj.vercel.app/api/setting/change-password" , setting , {headers :{
+        const res =await axios.put("https://ems-employee-management-system-api.vercel.app/api/setting/change-password" , setting , {headers :{
          Authorization: `Bearer ${localStorage.getItem("token")}`
         }
         })  

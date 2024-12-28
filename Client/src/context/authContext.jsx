@@ -14,7 +14,7 @@ function AuthContext( {children}) {
       try {
         const token  = localStorage.getItem("token")
         if(token){
-        const res  = await axios.get("https://ems-employee-management-system-r42scz8oj.vercel.app/api/auth/verify" ,
+        const res  = await axios.get("https://ems-employee-management-system-api.vercel.app/api/auth/verify" ,
          {headers : {'Authorization': `Bearer ${localStorage.getItem("token")}`} })
          if(res.data.success){
            setUser(res.data.user)

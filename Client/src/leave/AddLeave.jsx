@@ -26,7 +26,7 @@ function AddLeave() {
     const handleSubmit  = async (e) =>{
      e.preventDefault()
      try {
-        const res = await axios.post('https://ems-employee-management-system-r42scz8oj.vercel.app/api/leave/add',leave , {
+        const res = await axios.post('https://ems-employee-management-system-api.vercel.app/api/leave/add',leave , {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },

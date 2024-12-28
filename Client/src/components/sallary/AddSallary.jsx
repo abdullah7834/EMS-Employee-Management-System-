@@ -45,7 +45,7 @@ function AddSallary() {
 
         try {
         const res = await axios.post(
-            'https://ems-employee-management-system-r42scz8oj.vercel.app/api/sallary/add',
+            'https://ems-employee-management-system-api.vercel.app/api/sallary/add',
             sallary,
             {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

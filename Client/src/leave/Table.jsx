@@ -8,7 +8,7 @@ function Table() {
   const [filteredleaves, setfilteredLeaves] = useState(null);
   const fetchLeaves = async () => {
     try {
-      const res = await axios.get("https://ems-employee-management-system-r42scz8oj.vercel.app/api/leave", {
+      const res = await axios.get("https://ems-employee-management-system-api.vercel.app/api/leave", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -90,7 +90,7 @@ function Table() {
           </div>
         </div>
       ) : (
-        <div>A Raha hoon jnb .....</div>
+        <div>Loading .....</div>
       )}
     </>
   );

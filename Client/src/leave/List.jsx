@@ -14,7 +14,7 @@ function List() {
   const fetchLeaves = async () => {
     try { 
       const res = await axios.get(
-        `https://ems-employee-management-system-r42scz8oj.vercel.app/leave/${id}/${user.role}`,
+        `https://ems-employee-management-system-api.vercel.app/leave/${id}/${user.role}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
       if (res.data.success) {

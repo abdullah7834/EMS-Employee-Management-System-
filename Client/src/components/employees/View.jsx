@@ -10,7 +10,7 @@ function View() {
     useEffect(() => {
         const fetchEmployee = async () => {
             try {
-                const res = await axios.get(`https://ems-employee-management-system-r42scz8oj.vercel.app/api/employee/${id}`, {
+                const res = await axios.get(`https://ems-employee-management-system-api.vercel.app/api/employee/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
@@ -36,7 +36,7 @@ function View() {
                             <img
                                 src={
                                     employee?.userId?.profileImage
-                                        ? `https://ems-employee-management-system-r42scz8oj.vercel.app/${employee.userId.profileImage}`
+                                        ? `https://ems-employee-management-system-api.vercel.app/${employee.userId.profileImage}`
                                         : "/default-profile.png"
                                 }
                                 alt="Profile"

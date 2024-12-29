@@ -15,7 +15,7 @@ const app = express();
 connecttoDB()
 app.use(cors())
 app.use(express.static('public/uploads'))
-app.use(cors({ origin: 'https://ems-employee-management-system-frontend.vercel.app',
+app.use(cors({ origin: 'https://ems-employee-management-system-frontend.vercel.app/login',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
  }));
